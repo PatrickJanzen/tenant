@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Main\TenantDbConfig;
+use App\Entity\Main\Tenant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TenantDbConfig>
+ * @extends ServiceEntityRepository<Tenant>
  *
- * @method TenantDbConfig|null find($id, $lockMode = null, $lockVersion = null)
- * @method TenantDbConfig|null findOneBy(array $criteria, array $orderBy = null)
- * @method TenantDbConfig[]    findAll()
- * @method TenantDbConfig[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Tenant|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Tenant|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Tenant[]    findAll()
+ * @method Tenant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class TenantDbConfigRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TenantDbConfig::class);
+        parent::__construct($registry, Tenant::class);
     }
 
-    public function save(TenantDbConfig $entity, bool $flush = false): void
+    public function save(Tenant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TenantDbConfigRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(TenantDbConfig $entity, bool $flush = false): void
+    public function remove(Tenant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

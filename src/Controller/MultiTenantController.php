@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Main\TenantDbConfig;
+use App\Entity\Main\Tenant;
 use Hakam\MultiTenancyBundle\Services\DbService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -37,7 +37,7 @@ class MultiTenantController extends AbstractController
         // Create a new TenantDBConfig
         // Currently the new database should have the same username and password   as the main user  , cuz we are using the same user for all databases.
         // Multi users will be added in the future.
-        $tenantDb = new TenantDbConfig();
+        $tenantDb = new Tenant();
         $tenantDb
             ->setDbName('liveTenantDb1' . time())
             ->setDbUserName('root') // the same db user as main db
@@ -47,7 +47,7 @@ class MultiTenantController extends AbstractController
         $tenants[] = $tenantDb;
 
         // Create a new TenantDBConfig
-        $tenantDb = new TenantDbConfig();
+        $tenantDb = new Tenant();
         $tenantDb
             ->setDbName('liveTenantDb2' . time())
             ->setDbUserName('root') // the same db user as main db
@@ -75,7 +75,7 @@ class MultiTenantController extends AbstractController
     public function testDb(EntityManagerInterface $entityManager)
     {
 
-        $tenantDbConfigs = $this->mainEntityManager->getRepository(TenantDbConfig::class)->findAll();
+        $tenantDbConfigs = $this->mainEntityManager->getRepository(Tenant::class)->findAll();
 
         foreach ($tenantDbConfigs as $tenantDbConfig) {
             // Dispatch an event with the index ID for the entity that contains the tenant database connection details.
